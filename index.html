@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWLMC公告栏</title>
+    <title>GWLMC公告栏:)</title>
     <link rel="icon" href="./icon.ico" sizes="16x16" type="image/x-icon">
     <style>
         body, html {
@@ -48,12 +48,12 @@
     </style>
 </head>
 <body>
-    <video class="bg-video" autoplay loop muted>
-        <source src="./mp4.mp4" type="video/mp4">
+    <video class="bg-video" id="bg-video" autoplay muted>
+        <source src="./1.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <div class="content">
-        <h1 style="color: #EE6363;">GWLMC_公告栏</h1>
+        <h1 style="color: #EE6363;">GWLMC_公告栏:)</h1>
         <h1 style="color: #EE6363;">(MC版本：1.21.4)</h1>
         <h6 style="color: #FF7F00;">电话：13880504434</h6>
         <h6 style="color: #FF7F00;">邮箱：wodeshijieguowanli@163.com</h6>
@@ -61,7 +61,7 @@
             <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
         </h3>
         <h3 style="color: #00BFFF;">
-            服务器IP地址：1.tcp.cpolar.io:10369<br>开放时间：不定
+            MC(16人)生存服务器IP地址：1.tcp.cpolar.io:10369<br>开放时间：不定
         </h3>
         <h3 style="color: #8B2323;">
             ---------------公告：---------------
@@ -79,5 +79,12 @@
         <a href="https://www.douyin.com/">启动抖音</a>
         <a href="https://gwlmcyp.cpolar.top">启动GWL云盘</a>
     </div>
+    <script>
+        document.getElementById('bg-video').addEventListener('ended', function() {
+            this.src = './2.mp4';
+            this.load();
+            this.play();
+        });
+    </script>
 </body>
 </html>
