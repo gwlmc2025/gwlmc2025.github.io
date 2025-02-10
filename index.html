@@ -9,18 +9,17 @@
         body, html {
             height: 100%;
             margin: 0;
+            overflow: hidden; /* 防止滚动条出现 */
         }
-        .bg-video {
+        .content {
             position: absolute;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -100;
-            background: no-repeat;
-            background-size: cover;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1000;
+            color: #fff;
+            padding: 0 20px; /* 为内容留出一些空间 */
         }
         .footer {
             position: fixed;
@@ -28,8 +27,8 @@
             left: 0;
             width: 100%;
             height: 60px; /* 根据需要调整高度 */
-            background-color: #000; /* 背景颜色，可根据需要修改 */
-            color: #fff; /* 文字颜色，可根据需要修改 */
+            background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -40,35 +39,29 @@
             text-decoration: none; /* 去掉下划线 */
             margin: 0 10px; /* 链接之间的间距 */
         }
-        .content {
-            padding-bottom: 80px; /* 为底部留出空间 */
-        }
     </style>
 </head>
 <body>
-    <video class="bg-video" autoplay loop muted>
-        <source src="./mp4.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <canvas id="fireworksCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></canvas>
     <div class="content">
-        <h1 align="center" style="color: #EE6363;">GWLMC_公告栏:)</h1>
-        <h1 align="center" style="color: #EE6363;">(MC版本：1.21.4)</h1>
-        <h6 align="center" style="color: #FF7F00;">电话：13880504434</h6>
-        <h6 align="center" style="color: #FF7F00;">邮箱：wodeshijieguowanli@163.com</h6>
-        <h3 align="center" style="color: #EE82EE;">
+        <h1 style="color: #EE6363;">GWLMC_公告栏:)</h1>
+        <h1 style="color: #EE6363;">(MC版本：1.21.4)</h1>
+        <h6 style="color: #FF7F00;">电话：13880504434</h6>
+        <h6 style="color: #FF7F00;">邮箱：wodeshijieguowanli@163.com</h6>
+        <h3 style="color: #EE82EE;">
             <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
         </h3>
-        <h3 align="center" style="color: #00BFFF;">
+        <h3 style="color: #00BFFF;">
             MC(16人)生存服务器IP地址：1.tcp.cpolar.io:10369<br>开放时间：不定
         </h3>
-        <h3 align="center" style="color: #8B2323;">
+        <h3 style="color: #8B2323;">
             ---------------公告：---------------
         </h3>
-        <h3 align="center" style="color: #8B2323;">
+        <h3 style="color: #8B2323;">
             1.服务器性能升级；2.版本更新为<a href="https://zh.minecraft.wiki/w/Java%E7%89%881.21.4" style="color: #53868B;">1.21.4</a>,
             <a href="https://zh.minecraft.wiki/w/%E6%9E%81%E9%99%90%E6%A8%A1%E5%BC%8F" style="color: #FF0000;">极限模式!</a>
         </h3>
-        <h3 align="center" style="color: #8B2323;">
+        <h3 style="color: #8B2323;">
             3.服务器开启了<a href="https://zh.minecraft.wiki/w/Tutorial:PvP?variant=zh-cn" style="color: #FF6A6A;">PVP</a>;
             4.服务器模组改为<a href="https://zh.minecraft.wiki/w/%E5%8A%A0%E8%BD%BD%E5%99%A8Mod?variant=zh-cn#%E5%8A%A0%E8%BD%BD%E5%99%A8" style="color: #FFEC8B;">Fabric</a>版!
         </h3>
@@ -77,5 +70,74 @@
         <a href="https://www.douyin.com/">启动抖音</a>
         <a href="https://gwlmcyp.cpolar.top">启动GWL云盘</a>
     </div>
+    <script>
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+
+        function Particle(x, y, color) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.radius = Math.random() * 5 + 2;
+            this.velocity = {
+                x: (Math.random() - 0.5) * 10,
+                y: (Math.random() - 0.5) * 10
+            };
+            this.alpha = 1;
+        }
+
+        Particle.prototype.update = function () {
+            this.x += this.velocity.x;
+            this.y += this.velocity.y;
+            this.alpha -= 0.01;
+        };
+
+        Particle.prototype.draw = function () {
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        };
+
+        function createFirework() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle(x, y, color));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+            if (particles.length === 0) {
+                createFirework();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        createFirework();
+        animate();
+    </script>
 </body>
 </html>
