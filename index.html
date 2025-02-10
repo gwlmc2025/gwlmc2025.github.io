@@ -83,31 +83,24 @@
         });
 
         const particles = [];
+        const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
 
         function Particle(x, y, color) {
             this.x = x;
             this.y = y;
             this.color = color;
-            this.radius = Math.random() * 5 + 2;
+            this.radius = Math.random() * 2 + 1;
             this.velocity = {
-                x: (Math.random() - 0.5) * 10,
-                y: (Math.random() - 0.5) * 10
+                x: (Math.random() - 0.5) * 6,
+                y: (Math.random() - 0.5) * 6
             };
             this.alpha = 1;
-            this.tail = []; // 添加拖尾数组
-            this.maxTailLength = 20; // 拖尾的最大长度
         }
 
         Particle.prototype.update = function () {
             this.x += this.velocity.x;
             this.y += this.velocity.y;
-            this.alpha -= 0.01;
-
-            // 更新拖尾
-            this.tail.push({ x: this.x, y: this.y, alpha: this.alpha });
-            if (this.tail.length > this.maxTailLength) {
-                this.tail.shift();
-            }
+            this.alpha -= 0.02;
         };
 
         Particle.prototype.draw = function () {
@@ -118,26 +111,13 @@
             ctx.fillStyle = this.color;
             ctx.fill();
             ctx.restore();
-
-            // 绘制拖尾
-            ctx.save();
-            ctx.beginPath();
-            for (let i = 0; i < this.tail.length; i++) {
-                const tail = this.tail[i];
-                ctx.globalAlpha = tail.alpha * 0.5; // 拖尾透明度
-                ctx.arc(tail.x, tail.y, this.radius, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-            ctx.restore();
         };
 
         function createFirework() {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
-            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
             const color = colors[Math.floor(Math.random() * colors.length)];
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 30; i++) {
                 particles.push(new Particle(x, y, color));
             }
         }
