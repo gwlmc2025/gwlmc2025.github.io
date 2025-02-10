@@ -3,19 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文字居中并偏左</title>
+    <title>GWLMC公告栏:)</title>
+    <link rel="icon" href="./icon.ico" sizes="16x16" type="image/x-icon">
     <style>
-        .text-container {
-            display: grid;
-            place-items: center; /* 水平和垂直居中 */
-            padding-left: 50px; /* 在容器内部向左偏移50像素 */
-            height: 100vh; /* 让容器占满整个视口高度（可选） */
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .bg-video {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            background: no-repeat;
+            background-size: cover;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* 根据需要调整高度 */
+            background-color: #000; /* 背景颜色，可根据需要修改 */
+            color: #fff; /* 文字颜色，可根据需要修改 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* 确保覆盖在其他组件之上 */
+        }
+        .footer a {
+            color: #00CDCD; /* 链接颜色 */
+            text-decoration: none; /* 去掉下划线 */
+            margin: 0 10px; /* 链接之间的间距 */
+        }
+        .content {
+            padding-bottom: 80px; /* 为底部留出空间 */
+            text-align: left; /* 文字左对齐 */
+            margin-left: 20px; /* 左侧留出一定空间 */
         }
     </style>
 </head>
 <body>
-    <div class="text-container">
-        <h1>这是居中并偏左的文字</h1>
+    <video class="bg-video" autoplay loop muted>
+        <source src="./mp4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        <h1 style="color: #EE6363;">GWLMC_公告栏:)</h1>
+        <h1 style="color: #EE6363;">(MC版本：1.21.4)</h1>
+        <h6 style="color: #FF7F00;">电话：13880504434</h6>
+        <h6 style="color: #FF7F00;">邮箱：wodeshijieguowanli@163.com</h6>
+        <h3 style="color: #EE82EE;">
+            <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
+        </h3>
+        <h3 style="color: #00BFFF;">
+            MC(16人)生存服务器IP地址：1.tcp.cpolar.io:10369<br>开放时间：不定
+        </h3>
+        <h3 style="color: #8B2323;">
+            ---------------公告：---------------
+        </h3>
+        <h3 style="color: #8B2323;">
+            1.服务器性能升级；2.版本更新为<a href="https://zh.minecraft.wiki/w/Java%E7%89%881.21.4" style="color: #53868B;">1.21.4</a>,
+            <a href="https://zh.minecraft.wiki/w/%E6%9E%81%E9%99%90%E6%A8%A1%E5%BC%8F" style="color: #FF0000;">极限模式!</a>
+        </h3>
+        <h3 style="color: #8B2323;">
+            3.服务器开启了<a href="https://zh.minecraft.wiki/w/Tutorial:PvP?variant=zh-cn" style="color: #FF6A6A;">PVP</a>;
+            4.服务器模组改为<a href="https://zh.minecraft.wiki/w/%E5%8A%A0%E8%BD%BD%E5%99%A8Mod?variant=zh-cn#%E5%8A%A0%E8%BD%BD%E5%99%A8" style="color: #FFEC8B;">Fabric</a>版!
+        </h3>
+    </div>
+    <div class="footer">
+        <a href="https://www.douyin.com/">启动抖音</a>
+        <a href="https://gwlmcyp.cpolar.top">启动GWL云盘</a>
     </div>
 </body>
 </html>
