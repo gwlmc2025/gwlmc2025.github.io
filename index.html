@@ -1,58 +1,81 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-        <link rel="icon" href="./icon.ico" type="image/x-icon">
-                <style>
-                        body, html {
-                        height: 100%;
-                        margin: 0;
-                        }
-                        .bg-video {
-                        position: absolute;
-                        right: 0;
-                        bottom: 0;
-                        min-width: 100%;
-                        min-height: 100%;
-                        width: auto;
-                        height: auto;
-                        z-index: -100;
-                        background: no-repeat;
-                        background-size: cover;
-                        }
-                </style>
-                <style>
-                        .pink-bar {
-                            position: fixed;
-                            bottom: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 130px; /* 可以根据需要调整条子的高度 */
-                            background-color: pink;
-                            z-index: 9999; /* 确保条子覆盖在其他组件之上 */
-                        }
-                    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWLMC公告栏:)</title>
+    <link rel="icon" href="./icon.ico" sizes="16x16" type="image/x-icon">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .bg-video {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            background: no-repeat;
+            background-size: cover;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* 根据需要调整高度 */
+            background-color: #000; /* 背景颜色，可根据需要修改 */
+            color: #fff; /* 文字颜色，可根据需要修改 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* 确保覆盖在其他组件之上 */
+        }
+        .footer a {
+            color: #00CDCD; /* 链接颜色 */
+            text-decoration: none; /* 去掉下划线 */
+            margin: 0 10px; /* 链接之间的间距 */
+        }
+        .content {
+            padding-bottom: 80px; /* 为底部留出空间 */
+        }
+    </style>
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
-<video class="bg-video" autoplay loop muted>
-<source src="./mp4.mp4" type="video/mp4">
-Your browser does not support the video tag
-</video>
+    <video class="bg-video" autoplay loop muted>
+        <source src="./mp4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        <h1 align="center" style="color: #EE6363;">GWLMC_公告栏:)</h1>
+        <h1 align="center" style="color: #EE6363;">(MC版本：1.21.4)</h1>
+        <h6 align="center" style="color: #FF7F00;">电话：13880504434</h6>
+        <h6 align="center" style="color: #FF7F00;">邮箱：wodeshijieguowanli@163.com</h6>
+        <h3 align="center" style="color: #EE82EE;">
+            <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
+        </h3>
+        <h3 align="center" style="color: #00BFFF;">
+            MC(16人)生存服务器IP地址：1.tcp.cpolar.io:10369<br>开放时间：不定
+        </h3>
+        <h3 align="center" style="color: #8B2323;">
+            ---------------公告：---------------
+        </h3>
+        <h3 align="center" style="color: #8B2323;">
+            1.服务器性能升级；2.版本更新为<a href="https://zh.minecraft.wiki/w/Java%E7%89%881.21.4" style="color: #53868B;">1.21.4</a>,
+            <a href="https://zh.minecraft.wiki/w/%E6%9E%81%E9%99%90%E6%A8%A1%E5%BC%8F" style="color: #FF0000;">极限模式!</a>
+        </h3>
+        <h3 align="center" style="color: #8B2323;">
+            3.服务器开启了<a href="https://zh.minecraft.wiki/w/Tutorial:PvP?variant=zh-cn" style="color: #FF6A6A;">PVP</a>;
+            4.服务器模组改为<a href="https://zh.minecraft.wiki/w/%E5%8A%A0%E8%BD%BD%E5%99%A8Mod?variant=zh-cn#%E5%8A%A0%E8%BD%BD%E5%99%A8" style="color: #FFEC8B;">Fabric</a>版!
+        </h3>
+    </div>
+    <div class="footer">
+        <a href="https://www.douyin.com/">启动抖音</a>
+        <a href="https://gwlmcyp.cpolar.top">启动GWL云盘</a>
+    </div>
 </body>
 </html>
-<title>GWLMC公告栏:)</title>
-<link rel="icon" href="./icon.ico" sizes="16x16">
-    <font color="#EE6363"><h1 align="center">GWLMC_公告栏:)</h1></font>
-    <font color="#EE6363"><h1 align="center">(MC版本：1.21.4)</h1></font>
-    <h6 align="center"><font color="#FF7F00">电话：13880504434</font></h6>
-    <h6 align="center"><font color="#FF7F00">邮箱：wodeshijieguowanli@163.com</font></h6>
-    <h3 align="center"><font color="#EE82EE"><p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE">点击此处</a> 下载启动器</p></font></h3>
-    <h3 align="center"><font color="#00BFFF">MC(16人)生存服务器IP地址：1.tcp.cpolar.io:10369开放时间：不定</font></h3>
-    <h3 align="center"><font color="#8B2323">---------------公告：---------------</font></h3>
-    <h3 align="center"><font color="#8B2323">1.服务器性能升级；2.版本更新为<a href="https://zh.minecraft.wiki/w/Java%E7%89%881.21.4" style="color: #53868B">1.21.4</a>,<a href="https://zh.minecraft.wiki/w/%E6%9E%81%E9%99%90%E6%A8%A1%E5%BC%8F" style="color: #FF0000">极限模式!</a></font></h3>
-    <h3 align="center"><font color="#8B2323">3.服务器开启了<a href="https://zh.minecraft.wiki/w/Tutorial:PvP?variant=zh-cn" style="color: #FF6A6A">PVP</a>;4.服务器模组改为<a href="https://zh.minecraft.wiki/w/%E5%8A%A0%E8%BD%BD%E5%99%A8Mod?variant=zh-cn#%E5%8A%A0%E8%BD%BD%E5%99%A8" style="color: #FFEC8B">Fabric</a>版!</font></h3>
-<div>
-<div class="pink-bar">
-<h3 align="center"><font color="#00CDCD"><p>启动<a href="https://www.douyin.com/" style="color: #008B8B">抖音</a></p></font></h3>
-<h3 align="center"><font color="#00CDCD"><p>启动<a href="https://gwlmcyp.cpolar.top" style="color: #008B8B">GWL云盘</a></p></font></h3>
-</div>
