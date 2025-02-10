@@ -11,6 +11,7 @@
             margin: 0;
             overflow: hidden; /* 防止滚动条出现 */
             background-color: #000; /* 设置背景为黑色 */
+            color: #fff;
         }
         .content {
             position: absolute;
@@ -19,7 +20,6 @@
             transform: translate(-50%, -50%);
             text-align: center;
             z-index: 1000;
-            color: #fff;
             padding: 0 20px; /* 为内容留出一些空间 */
         }
         .footer {
@@ -121,15 +121,14 @@
 
             // 绘制拖尾
             ctx.save();
-            ctx.globalAlpha = 0.5; // 拖尾透明度
             ctx.beginPath();
             for (let i = 0; i < this.tail.length; i++) {
                 const tail = this.tail[i];
-                ctx.moveTo(tail.x, tail.y);
-                ctx.lineTo(this.x, this.y);
+                ctx.globalAlpha = tail.alpha * 0.5; // 拖尾透明度
+                ctx.arc(tail.x, tail.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
             }
-            ctx.strokeStyle = this.color;
-            ctx.stroke();
             ctx.restore();
         };
 
