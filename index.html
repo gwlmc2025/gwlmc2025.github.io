@@ -77,10 +77,10 @@
             <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
         </h3>
         <h3 style="color: #00BFFF;">
-            MC(2025人)生存服务器IP地址：2.tcp.cpolar.cn:12619<br>开放时间：不定
+            MC(2025人)服务器IP地址：2.tcp.cpolar.cn:12619<br>开放时间：不定
         </h3>
         <h3 style="color: #8B2323;">
-            -----------公告-----------
+            ----------公告----------
         </h3>
         <h3 style="color: #8B2323;">
             1.服务器性能升级；2.版本更新为<a href="https://zh.minecraft.wiki/w/Java%E7%89%881.21.4" style="color: #53868B;">1.21.4</a>,
@@ -94,6 +94,9 @@
     <div class="footer" id="footer">
         <a href="https://gwlmcyp.cpolar.top">启动GWL云盘</a>
     </div>
+    <audio id="audio1" src="1.mp3" preload="auto"></audio>
+    <audio id="audio2" src="2.mp3" preload="auto"></audio>
+    <audio id="audio3" src="3.mp3" preload="auto"></audio>
     <script>
         const video = document.getElementById('bg-video');
         const bgImage = document.getElementById('bg-image');
@@ -116,6 +119,25 @@
             document.getElementById('footer').style.opacity = 1;
             bgImage.style.opacity = 1; // 显示背景图片
         };
+
+        // 音频循环播放逻辑
+        const audios = [document.getElementById('audio1'), document.getElementById('audio2'), document.getElementById('audio3')];
+        let currentAudioIndex = 0;
+
+        function playNextAudio() {
+            audios[currentAudioIndex].pause();
+            currentAudioIndex = (currentAudioIndex + 1) % audios.length;
+            audios[currentAudioIndex].play();
+        }
+
+        audios.forEach((audio, index) => {
+            audio.addEventListener('ended', () => {
+                playNextAudio();
+            });
+        });
+
+        // Start playing the first audio
+        audios[currentAudioIndex].play();
     </script>
 </body>
 </html>
