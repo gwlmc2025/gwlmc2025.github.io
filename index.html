@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWLMC公告栏:)</title>
+    <title>GWLMC公告栏</title>
     <link rel="icon" href="./icon.ico" sizes="16x16" type="image/x-icon">
     <style>
         /* 定义自定义字体 */
@@ -31,12 +31,16 @@
             padding-bottom: 80px; /* 为底部留出空间 */
             text-align: left; /* 文字左对齐 */
             margin-left: 20px; /* 左侧留出一定空间 */
+            opacity: 0; /* 初始透明度为0 */
+            transition: opacity 2s ease-in; /* 渐变效果，持续2秒 */
         }
         .footer {
             position: absolute;
             bottom: 20px; /* 距离底部的距离 */
             left: 20px; /* 距离左侧的距离 */
             color: #fff; /* 文字颜色 */
+            opacity: 0; /* 初始透明度为0 */
+            transition: opacity 2s ease-in; /* 渐变效果，持续2秒 */
         }
         .footer a {
             color: #00CDCD; /* 链接颜色 */
@@ -50,19 +54,19 @@
         <source src="./1.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <div class="content">
-        <h1 style="color: #EE6363;">GWLMC_公告栏:)</h1>
-        <h1 style="color: #EE6363;">(MC版本：1.21.4)</h1>
-        <h6 style="color: #FF7F00;">电话：13880504434</h6>
+    <div class="content" id="content">
+        <h1 style="color: #EE6363;">GWLMC_公告栏</h1>
+        <h1 style="color: #EE6363;">MC版本：1.21.4</h1>
+        <h6 style="color: #FF7F00;">QQ群：854714085</h6>
         <h6 style="color: #FF7F00;">邮箱：wodeshijieguowanli@163.com</h6>
         <h3 style="color: #EE82EE;">
-            <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
+            <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a>下载启动器</p>
         </h3>
         <h3 style="color: #00BFFF;">
-            MC(16人)生存服务器IP地址：1.tcp.cpolar.io:10369<br>开放时间：不定
+            MC(16人)生存服务器IP地址：2.tcp.cpolar.cn:12619<br>开放时间：不定
         </h3>
         <h3 style="color: #8B2323;">
-            ---------------公告：---------------
+            ----------公告----------
         </h3>
         <h3 style="color: #8B2323;">
             1.服务器性能升级；2.版本更新为<a href="https://zh.minecraft.wiki/w/Java%E7%89%881.21.4" style="color: #53868B;">1.21.4</a>,
@@ -73,9 +77,8 @@
             4.服务器模组改为<a href="https://zh.minecraft.wiki/w/%E5%8A%A0%E8%BD%BD%E5%99%A8Mod?variant=zh-cn#%E5%8A%A0%E8%BD%BD%E5%99%A8" style="color: #FFEC8B;">Fabric</a>版!
         </h3>
     </div>
-    <div class="footer">
-        <a href="https://www.douyin.com/">启动抖音</a>
-        <a href="https://gwlmcyp.cpolar.top">启动GWL云盘</a>
+    <div class="footer" id="footer">
+        <a href="https://gwlmcyp.cpolar.top">启动云盘</a>
     </div>
     <script>
         const video = document.getElementById('bg-video');
@@ -91,6 +94,12 @@
             video.load();
             video.play();
         });
+
+        // 页面加载完成后，设置内容和导航栏的透明度为1
+        window.onload = function() {
+            document.getElementById('content').style.opacity = 1;
+            document.getElementById('footer').style.opacity = 1;
+        };
     </script>
 </body>
 </html>
