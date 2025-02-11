@@ -68,6 +68,25 @@
             color: #fff; /* 文字颜色 */
             cursor: pointer; /* 鼠标悬停时显示手型 */
         }
+
+        /* 媒体查询：当屏幕宽度小于768px时，应用手机版排版 */
+        @media (max-width: 768px) {
+            .content {
+                text-align: center; /* 文字居中 */
+                margin-left: 0; /* 取消左侧留出的空间 */
+            }
+            .footer {
+                left: 0; /* 底部链接左对齐 */
+                width: 100%; /* 底部链接宽度为100% */
+                text-align: left; /* 底部链接左对齐 */
+            }
+            .footer a {
+                margin: 0; /* 取消链接之间的间距 */
+            }
+            .play-button {
+                right: 20px; /* 播放按钮右对齐 */
+            }
+        }
     </style>
 </head>
 <body>
