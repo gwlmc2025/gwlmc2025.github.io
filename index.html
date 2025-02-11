@@ -6,55 +6,53 @@
     <title>GWLMC公告栏</title>
     <link rel="icon" href="./icon.ico" sizes="16x16" type="image/x-icon">
     <style>
+        /* 定义自定义字体 */
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('./font.ttf') format('truetype');
+        }
+
+        /* 应用自定义字体到整个网页 */
         body, html {
             height: 100%;
             margin: 0;
+            font-family: 'CustomFont', sans-serif; /* 使用自定义字体 */
         }
         .bg-video {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -100;
-            background: no-repeat;
-            background-size: cover;
-        }
-        .footer {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 60px; /* 根据需要调整高度 */
-            background-color: #000; /* 背景颜色，可根据需要修改 */
-            color: #fff; /* 文字颜色，可根据需要修改 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999; /* 确保覆盖在其他组件之上 */
-        }
-        .footer a {
-            color: #00CDCD; /* 链接颜色 */
-            text-decoration: none; /* 去掉下划线 */
-            margin: 0 10px; /* 链接之间的间距 */
+            height: 100%;
+            object-fit: cover; /* 确保视频覆盖整个屏幕 */
+            z-index: -100;
         }
         .content {
             padding-bottom: 80px; /* 为底部留出空间 */
             text-align: left; /* 文字左对齐 */
             margin-left: 20px; /* 左侧留出一定空间 */
         }
+        .footer {
+            position: absolute;
+            bottom: 20px; /* 距离底部的距离 */
+            left: 20px; /* 距离左侧的距离 */
+            color: #fff; /* 文字颜色 */
+        }
+        .footer a {
+            color: #00CDCD; /* 链接颜色 */
+            text-decoration: none; /* 去掉下划线 */
+            margin: 0 10px; /* 链接之间的间距 */
+        }
     </style>
 </head>
 <body>
-    <video class="bg-video" id="bg-video" autoplay muted>
+    <video class="bg-video" id="bg-video" autoplay muted loop>
         <source src="./1.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <div class="content">
         <h1 style="color: #EE6363;">GWLMC_公告栏</h1>
-        <h1 style="color: #EE6363;">MC：1.21.4</h1>
+        <h1 style="color: #EE6363;">(MC版本：1.21.4)</h1>
         <h6 style="color: #FF7F00;">电话：13880504434</h6>
         <h6 style="color: #FF7F00;">邮箱：wodeshijieguowanli@163.com</h6>
         <h3 style="color: #EE82EE;">
