@@ -60,6 +60,14 @@
             text-decoration: none; /* 去掉下划线 */
             margin: 0 10px; /* 链接之间的间距 */
         }
+        .play-button {
+            position: fixed;
+            bottom: 20px; /* 距离底部的距离 */
+            right: 20px; /* 距离右侧的距离 */
+            font-size: 2em; /* 字体大小 */
+            color: #fff; /* 文字颜色 */
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+        }
     </style>
 </head>
 <body>
@@ -94,12 +102,14 @@
     <div class="footer" id="footer">
         <a href="https://gwlmcyp.cpolar.top">启动GWL云盘</a>
     </div>
+    <div class="play-button" id="play-button">▶</div>
     <audio id="audio1" src="1.mp3" preload="auto"></audio>
     <audio id="audio2" src="2.mp3" preload="auto"></audio>
     <audio id="audio3" src="3.mp3" preload="auto"></audio>
     <script>
         const video = document.getElementById('bg-video');
         const bgImage = document.getElementById('bg-image');
+        const playButton = document.getElementById('play-button');
         let isFirstVideoPlaying = true;
 
         video.addEventListener('ended', function() {
@@ -134,6 +144,15 @@
             audio.addEventListener('ended', () => {
                 playNextAudio();
             });
+        });
+
+        // 播放按钮逻辑
+        playButton.addEventListener('click', () => {
+            if (audios[currentAudioIndex].paused) {
+                audios[currentAudioIndex].play();
+            } else {
+                audios[currentAudioIndex].pause();
+            }
         });
 
         // Start playing the first audio
