@@ -68,6 +68,13 @@
             color: #fff; /* 文字颜色 */
             cursor: pointer; /* 鼠标悬停时显示手型 */
         }
+        /* 烟花效果 */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* 让canvas不干扰点击事件 */
+        }
 
         /* 媒体查询：当屏幕宽度小于768px时，应用手机版排版 */
         @media (max-width: 768px) {
@@ -122,6 +129,7 @@
         <a href="https://gwlmcyp.cpolar.top">启动GWL云盘</a>
     </div>
     <div class="play-button" id="play-button">▶</div>
+    <canvas id="fireworksCanvas"></canvas>
     <audio id="audio1" src="1.mp3" preload="auto"></audio>
     <audio id="audio2" src="2.mp3" preload="auto"></audio>
     <audio id="audio3" src="3.mp3" preload="auto"></audio>
@@ -129,7 +137,13 @@
         const video = document.getElementById('bg-video');
         const bgImage = document.getElementById('bg-image');
         const playButton = document.getElementById('play-button');
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
         let isFirstVideoPlaying = true;
+
+        // 设置canvas大小
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
         video.addEventListener('ended', function() {
             if (isFirstVideoPlaying) {
@@ -176,6 +190,59 @@
 
         // Start playing the first audio
         audios[currentAudioIndex].play();
+
+        // 烟花效果
+        function createFirework(x, y) {
+            const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+            const particles = [];
+
+            for (let i = 0; i < 50; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 1;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particles.push({ x, y, angle, speed, color });
+            }
+
+            return particles;
+        }
+
+        function drawParticles(particles) {
+            particles.forEach(particle => {
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color;
+                ctx.fill();
+            });
+        }
+
+        function updateParticles(particles) {
+            particles.forEach(particle => {
+                particle.x += particle.speed * Math.cos(particle.angle);
+                particle.y += particle.speed * Math.sin(particle.angle);
+            });
+        }
+
+        let fireworks = [];
+
+        document.addEventListener('click', (event) => {
+            const x = event.clientX;
+            const y = event.clientY;
+            fireworks.push(createFirework(x, y));
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            fireworks.forEach((firework, index) => {
+                drawParticles(firework);
+                updateParticles(firework);
+                if (firework.some(particle => particle.x < 0 || particle.x > canvas.width || particle.y < 0 || particle.y > canvas.height)) {
+                    fireworks.splice(index, 1);
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 </body>
 </html>
