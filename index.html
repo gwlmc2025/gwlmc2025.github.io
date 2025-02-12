@@ -198,9 +198,9 @@
 
             for (let i = 0; i < 50; i++) {
                 const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 5 + 1;
+                const speed = Math.random() * 3 + 1; // 速度减小
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                particles.push({ x, y, angle, speed, color });
+                particles.push({ x, y, angle, speed, color, life: 1 }); // 添加生命值
             }
 
             return particles;
@@ -211,7 +211,9 @@
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
                 ctx.fillStyle = particle.color;
+                ctx.globalAlpha = particle.life; // 设置透明度
                 ctx.fill();
+                ctx.globalAlpha = 1; // 重置透明度
             });
         }
 
@@ -219,6 +221,7 @@
             particles.forEach(particle => {
                 particle.x += particle.speed * Math.cos(particle.angle);
                 particle.y += particle.speed * Math.sin(particle.angle);
+                particle.life -= 0.02; // 逐渐减少生命值
             });
         }
 
@@ -235,7 +238,7 @@
             fireworks.forEach((firework, index) => {
                 drawParticles(firework);
                 updateParticles(firework);
-                if (firework.some(particle => particle.x < 0 || particle.x > canvas.width || particle.y < 0 || particle.y > canvas.height)) {
+                if (firework.some(particle => particle.life <= 0 || particle.x < 0 || particle.x > canvas.width || particle.y < 0 || particle.y > canvas.height)) {
                     fireworks.splice(index, 1);
                 }
             });
