@@ -111,8 +111,8 @@
         <h3 style="color: #EE82EE;">
             <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
         </h3>
-        <h3 style="color: #00BFFF;">
-            MC(2025人)服务器IP地址：2.tcp.cpolar.cn:12619<br>开放时间：不定
+        <h3 style="color: #00BFFF;" id="server-ip">
+            MC(2025人)服务器IP地址：加载中...
         </h3>
         <h3 style="color: #8B2323;">
             ----------公告----------
@@ -247,6 +247,18 @@
         }
 
         animate();
+
+        // 动态获取服务器IP地址
+        const serverIpElement = document.getElementById('server-ip');
+        fetch('https://gwlmcyp.cpolar.top/McIP/IP.txt')
+            .then(response => response.text())
+            .then(ip => {
+                serverIpElement.textContent = `MC(2025人)服务器IP地址：${ip}`;
+            })
+            .catch(error => {
+                console.error('获取服务器IP地址失败:', error);
+                serverIpElement.textContent = 'MC(2025人)服务器IP地址：获取失败';
+            });
     </script>
 </body>
 </html>
