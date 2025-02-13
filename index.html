@@ -112,7 +112,7 @@
             <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
         </h3>
         <h3 style="color: #00BFFF;" id="server-ip">
-            MC(2025人)服务器IP地址：加载中...
+            MC(2025人)服务器状态/IP：加载中...
         </h3>
         <h3 style="color: #8B2323;">
             ----------公告----------
@@ -253,11 +253,11 @@
         fetch('https://gwlmcyp.cpolar.top/McIP/IP.txt')
             .then(response => response.text())
             .then(ip => {
-                serverIpElement.textContent = `MC(2025人)服务器IP地址：${ip}`;
+                serverIpElement.textContent = `MC(2025人)服务器状态/IP：${ip}`;
             })
             .catch(error => {
-                console.error('获取服务器IP地址失败:', error);
-                serverIpElement.textContent = 'MC(2025人)服务器IP地址：获取失败';
+                console.error('Error:Data/Ping_Error', error);
+                serverIpElement.textContent = 'MC(2025人)服务器状态/IP：未启动，请联系管理员。';
             });
     </script>
 </body>
