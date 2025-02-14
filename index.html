@@ -100,7 +100,8 @@
 <body>
     <video class="bg-video" id="bg-video" autoplay muted>
         <source src="./1.mp4" type="video/mp4">
-        Your browser does not support the video tag.
+        你使用的浏览器暂不支持此网站<a href="./MicrosoftEdgeSetup.exe" style="color: #EE82EE;">点击此处</a>下载支持的浏览器。
+        ——GWLMC
     </video>
     <div class="bg-image" id="bg-image"></div>
     <div class="content" id="content">
@@ -112,7 +113,7 @@
             <p>还没有启动器？<a href="./hmcl.exe" style="color: #EE82EE;">点击此处</a> 下载启动器</p>
         </h3>
         <h3 style="color: #00BFFF;" id="server-ip">
-            MC(2025人)服务器状态/IP：加载中...
+            MC(2025人)服务器状态：加载中...
         </h3>
         <h3 style="color: #8B2323;">
             ----------公告----------
@@ -253,11 +254,11 @@
         fetch('https://gwlmcyp.cpolar.top/McIP/IP.txt')
             .then(response => response.text())
             .then(ip => {
-                serverIpElement.textContent = `MC(2025人)服务器状态/IP：${ip}`;
+                serverIpElement.textContent = `MC(2025人)服务器IP：${ip}`;
             })
             .catch(error => {
                 console.error('Error:Data/Ping_Error', error);
-                serverIpElement.textContent = 'MC(2025人)服务器状态/IP：未启动，请联系管理员。';
+                serverIpElement.textContent = 'GWLMC服务器暂未启动，请联系管理员。';
             });
     </script>
 </body>
