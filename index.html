@@ -45,14 +45,16 @@
             padding-bottom: 80px; /* 为底部留出空间 */
             text-align: left; /* 文字左对齐 */
             margin-left: 20px; /* 左侧留出一定空间 */
-            opacity: 1; /* 设置透明度为1，直接显示 */
+            opacity: 0; /* 初始透明度为0 */
+            transition: opacity 2s ease-in; /* 渐变效果，持续2秒 */
         }
         .footer {
             position: absolute;
             bottom: 20px; /* 距离底部的距离 */
             left: 20px; /* 距离左侧的距离 */
             color: #fff; /* 文字颜色 */
-            opacity: 1; /* 设置透明度为1，直接显示 */
+            opacity: 0; /* 初始透明度为0 */
+            transition: opacity 2s ease-in; /* 渐变效果，持续2秒 */
         }
         .footer a {
             color: #00CDCD; /* 链接颜色 */
@@ -145,7 +147,7 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // 页面加载完成后，显示文字内容
+        // 页面加载完成后，设置内容和导航栏的透明度为1
         window.onload = function() {
             document.getElementById('content').style.opacity = 1;
             document.getElementById('footer').style.opacity = 1;
