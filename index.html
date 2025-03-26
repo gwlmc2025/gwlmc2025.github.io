@@ -248,7 +248,7 @@
         fetch('https://gwlmcyp.cpolar.top/McIP/IP.txt')
             .then(response => response.text())
             .then(ip => {
-                serverIpElement.textContent = `<span style="color: #a4d415;">M</span><span style="color: #a5c125;">C</span><span style="color: #a7ae35;">(</span><span style="color: #a89b45;">2</span><span style="color: #a98756;">0</span><span style="color: #aa7466;">2</span><span style="color: #ac6176;">5</span><span style="color: #ad4e86;">人</span><span style="color: #a7538f;">)</span><span style="color: #a05997;">服</span><span style="color: #9a5ea0;">务</span><span style="color: #9364a8;">器</span><span style="color: #8d69b1;">I</span><span style="color: #866fb9;">P</span><span style="color: #8074c2;">：</span>：${ip}`;
+                serverIpElement.textContent = `MC服务器IP:${ip}`;
             })
             .catch(error => {
                 console.error('Error:Data/Ping_Error', error);
