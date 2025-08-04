@@ -112,7 +112,6 @@
         <h3 style="color: #EE82EE;">
             <p><span style="color: #5f38cc;">还</span><span style="color: #6c52b1;">没</span><span style="color: #786c96;">有</span><span style="color: #85877c;">启</span><span style="color: #92a161;">动</span><span style="color: #9ebb46;">器</span><span style="color: #abd52b;">？</span><a href="./hmcl.exe" style="color: #EE82EE;"><span style="color: #7331c5;">点</span><span style="color: #98458b;">击</span><span style="color: #bc5a52;">此</span><span style="color: #e16e18;">处</span></a> <span style="color: #adf3b9;">下</span><span style="color: #b1c89b;">载</span><span style="color: #b69d7c;">启</span><span style="color: #ba725e;">动</span><span style="color: #be473f;">器</span></p>
         </h3>
-        <h3 style="color: #00BFFF;" id="server-ip">
             <span style="color: #6d4c77;">M</span><span style="color: #7f4d8b;">C</span><span style="color: #924e9f;">(</span><span style="color: #a44fb2;">2</span><span style="color: #b750c6;">0</span><span style="color: #c951da;">2</span><span style="color: #dc52ee;">5</span><span style="color: #e459f7;">人</span><span style="color: #d869ea;">)</span><span style="color: #cd7ade;">服</span><span style="color: #c18bd1;">务</span><span style="color: #b59cc4;">器</span><span style="color: #aaadb8;">状</span><span style="color: #9ebdab;">态</span><span style="color: #9fc6a4;">：</span><span style="color: #a7cb9f;">加</span><span style="color: #afd09b;">载</span><span style="color: #b7d596;">中</span><span style="color: #bfd991;">.</span><span style="color: #c7de8d;">.</span><span style="color: #cfe388;">.</span>
         </h3>
         <h3 style="color: #8B2323;">
@@ -242,18 +241,7 @@
         }
 
         animate();
-
-        // 动态获取服务器IP地址
-        const serverIpElement = document.getElementById('server-ip');
-        fetch('https://gwlmcyp.cpolar.top/McIP/IP.txt')
-            .then(response => response.text())
-            .then(ip => {
-                serverIpElement.textContent = `MC服务器IP:${ip}`;
-            })
-            .catch(error => {
-                console.error('Error:Data/Ping_Error', error);
-                serverIpElement.textContent = 'GWLMC服务器暂未启动，请联系管理员！';
-            });
     </script>
 </body>
 </html>
+
