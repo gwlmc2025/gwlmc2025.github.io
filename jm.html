@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="Zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无敌加密器</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 80%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #5cb85c;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .output {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+        .logout-button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 加密部分 -->
+        <div class="section">
+            <h2>加密</h2>
+            <textarea id="content" placeholder="输入要加密的内容" rows="4"></textarea>
+            <input type="text" id="key" placeholder="输入加密密钥">
+            <button onclick="encrypt()">加密内容</button>
+            <div class="output">
+                <textarea id="encryptedOutput" rows="6" readonly placeholder="加密结果将显示在此处"></textarea>
+            </div>
+        </div>
+
+        <!-- 解密部分 -->
+        <div class="section">
+            <h2>解密</h2>
+            <textarea id="encryptedInput" rows="6" placeholder="粘贴加密后的文本"></textarea>
+            <input type="text" id="decryptKey" placeholder="输入解密密钥">
+            <button onclick="decrypt()">解密内容</button>
+            <div class="output">
+                <textarea id="decryptedContent" rows="4" readonly placeholder="解密结果将显示在此处"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function encrypt() {
+            const content = document.getElementById('content').value;
+            const password = document.getElementById('key').value;
+            
+            if (!content || !password) {
+                alert('请填写内容和密钥');
+                return;
+            }
+
+            try {
+                // 生成随机盐（16字节）
+                const salt = crypto.getRandomValues(new Uint8Array(16));
+                
+                // 导入密钥材料
+                const keyMaterial = await crypto.subtle.importKey(
+                    'raw',
+                    new TextEncoder().encode(password),
+                    { name: 'PBKDF2' },
+                    false,
+                    ['deriveKey']
+                );
+                
+                // 派生密钥
+                const key = await crypto.subtle.deriveKey(
+                    {
+                        name: 'PBKDF2',
+                        salt: salt,
+                        iterations: 100000,
+                        hash: 'SHA-256'
+                    },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['encrypt']
+                );
+                
+                // 生成随机IV（12字节）
+                const iv = crypto.getRandomValues(new Uint8Array(12));
+                
+                // 加密内容
+                const encryptedContent = await crypto.subtle.encrypt(
+                    { name: 'AES-GCM', iv: iv },
+                    key,
+                    new TextEncoder().encode(content)
+                );
+                
+                // 合并盐、IV和密文
+                const combined = new Uint8Array([
+                    ...salt,
+                    ...iv,
+                    ...new Uint8Array(encryptedContent)
+                ]);
+                
+                // 转换为十六进制
+                const hex = Array.from(combined).map(b => 
+                    b.toString(16).padStart(2, '0')).join('');
+                
+                // 显示加密结果
+                document.getElementById('encryptedOutput').value = hex;
+                
+            } catch (error) {
+                alert('加密失败: ' + error.message);
+            }
+        }
+
+        async function decrypt() {
+            const hex = document.getElementById('encryptedInput').value;
+            const password = document.getElementById('decryptKey').value;
+            
+            if (!hex || !password) {
+                alert('请填写加密文本和密钥');
+                return;
+            }
+
+            try {
+                // 转换十六进制为字节数组
+                const bytes = new Uint8Array(
+                    hex.match(/.{1,2}/g).map(byte => parseInt(byte, 16))
+                );
+                
+                // 分解各部分数据
+                const salt = bytes.slice(0, 16);
+                const iv = bytes.slice(16, 28);
+                const ciphertext = bytes.slice(28);
+                
+                // 导入密钥材料
+                const keyMaterial = await crypto.subtle.importKey(
+                    'raw',
+                    new TextEncoder().encode(password),
+                    { name: 'PBKDF2' },
+                    false,
+                    ['deriveKey']
+                );
+                
+                // 派生密钥
+                const key = await crypto.subtle.deriveKey(
+                    {
+                        name: 'PBKDF2',
+                        salt: salt,
+                        iterations: 100000,
+                        hash: 'SHA-256'
+                    },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['decrypt']
+                );
+                
+                // 解密内容
+                const decrypted = await crypto.subtle.decrypt(
+                    { name: 'AES-GCM', iv: iv },
+                    key,
+                    ciphertext
+                );
+                
+                document.getElementById('decryptedContent').value = 
+                    new TextDecoder().decode(decrypted);
+                    
+            } catch (error) {
+                alert('解密失败: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
